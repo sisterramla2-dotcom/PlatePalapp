@@ -1,0 +1,7 @@
+
+import React from 'react';import {View,Text,Dimensions} from 'react-native';import Svg,{Path,Circle,Defs,LinearGradient,Stop} from 'react-native-svg';import {Colors} from '../theme/colors';
+export function WeightChart({startW,targetW,targetLabel}:{startW:number;targetW:number;targetLabel:string}){
+ const W=Dimensions.get('window').width-64; const H=160;
+ const pathLine=`M 20 30 Q ${W/2} ${H*0.6} ${W-20} ${H-30}`; const pathArea=`${pathLine} L ${W-20} ${H} L 20 ${H} Z`;
+ return (<View><View style={{width:W,height:H}}><Svg width={W} height={H}><Defs><LinearGradient id="g" x1="0" y1="0" x2="0" y2="1"><Stop offset="0" stopColor={Colors.brand} stopOpacity={0.25}/><Stop offset="1" stopColor={Colors.brand} stopOpacity={0}/></LinearGradient></Defs><Path d={pathArea} fill="url(#g)"/><Path d={pathLine} stroke={Colors.brand} strokeWidth={4} fill="none" strokeLinecap="round"/><Circle cx={20} cy={30} r={8} fill="#FFF" stroke={Colors.brand} strokeWidth={2}/><Circle cx={W-20} cy={H-30} r={8} fill="#FFF" stroke={Colors.brand} strokeWidth={2}/></Svg><View style={{position:'absolute',right:0,bottom:20,backgroundColor:Colors.brand,paddingHorizontal:10,paddingVertical:4,borderRadius:12}}><Text style={{color:'#FFF',fontWeight:'800',fontSize:13}}>{targetW} kg</Text></View></View><View style={{flexDirection:'row',justifyContent:'space-between',marginTop:4}}><Text style={{fontSize:12,color:Colors.textSecondary}}>Today</Text><Text style={{fontSize:12,color:Colors.textSecondary}}>{targetLabel}</Text></View></View>)
+}
